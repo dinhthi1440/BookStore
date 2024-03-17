@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BookStore</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Đăng nhập</string>
+    <string name="signup">Đăng ký</string>
+    <string name="home">Trang chủ</string>
+    <string name="friend">Bạn bè</string>
+    <string name="notify">Thông báo</string>
+    <string name="setting">Cài đặt</string>
+</resources>
