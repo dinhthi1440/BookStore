@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.graphics.Color
 import com.example.bookstore.R
 import com.example.bookstore.databinding.DlAnimationSuccessBinding
+import com.example.bookstore.databinding.DlConfirmPasswordBinding
 import com.example.bookstore.databinding.DlConfirmingPurchaseQuaniyBinding
 
 fun Dialog.openDlSuccess(stopFlag: Boolean = false) {
@@ -65,6 +66,29 @@ fun Dialog.confirmNumberPurchase(){
     binding.btnConfirm.setOnClickListener {
         this.dismiss()
     }
+}
 
+fun Dialog.confirmPassword(pressButton: (String) -> Unit) {
+    val binding = DlConfirmPasswordBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    window?.apply {
+        setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+        attributes.apply {
+            gravity = Gravity.CENTER
+        }
+    }
+
+    binding.btnConfirm.setOnClickListener {
+        pressButton(binding.edittextPassword.text.toString())
+        this.dismiss()
+    }
+    binding.btnCancel.setOnClickListener {
+        this.dismiss()
+    }
+    show()
 }
 

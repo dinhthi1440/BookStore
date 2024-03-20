@@ -1,6 +1,7 @@
 package com.example.bookstore.ui.order_detail
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookstore.base.BaseFragment
 import com.example.bookstore.base.BaseViewModel
@@ -34,6 +35,8 @@ class OrderDetailFragment:BaseFragment<FragmentOrderDetailBinding>(FragmentOrder
             recyclerViewProductOrdered.layoutManager = LinearLayoutManager(root.context)
             listAdapterProductOrdered.submitList(listEvaluate)
             recyclerViewProductOrdered.adapter = listAdapterProductOrdered
+
+            imgBack.setOnClickListener { findNavController().popBackStack() }
         }
     }
 

@@ -38,8 +38,14 @@
             android:id="@+id/action_homeFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_shopMessageFragment"
-            app:destination="@id/shopMessageFragment" />
+            android:id="@+id/action_homeFragment_to_showAllBookFragment"
+            app:destination="@id/showAllBookFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifyFragment"
@@ -50,12 +56,20 @@
         android:id="@+id/settingFragment"
         android:name="com.example.bookstore.ui.setting.SettingFragment"
         android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_accountInformationFragment"
+            app:destination="@id/accountInformationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/friendsFragment"
         android:name="com.example.bookstore.ui.friends.FriendsFragment"
         android:label="fragment_friends"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friendsFragment_to_shopMessageFragment"
+            app:destination="@id/shopMessageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookDetailFragment"
         android:name="com.example.bookstore.ui.book_detail.BookDetailFragment"
@@ -74,12 +88,19 @@
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
 
+        <action
+            android:id="@+id/action_cartFragment_to_payFragment"
+            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
         android:name="com.example.bookstore.ui.order.OrderFragment"
         android:label="fragment_order"
-        tools:layout="@layout/fragment_order" />
+        tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_orderFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.example.bookstore.ui.order_detail.OrderDetailFragment"
@@ -87,7 +108,45 @@
         tools:layout="@layout/fragment_order_detail" />
     <fragment
         android:id="@+id/shopMessageFragment"
-        android:name="com.example.bookstore.ui.shop_message.ShopMessageFragment"
+        android:name="com.example.bookstore.ui.message.MessageFragment"
         android:label="fragment_shop_message"
-        tools:layout="@layout/fragment_shop_message" />
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/showAllBookFragment"
+        android:name="com.example.bookstore.ui.show_all_book.ShowAllBookFragment"
+        android:label="fragment_show_all_book"
+        tools:layout="@layout/fragment_show_all_book" />
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.example.bookstore.ui.pay.PayFragment"
+        android:label="fragment_pay"
+        tools:layout="@layout/fragment_pay" >
+        <action
+            android:id="@+id/action_payFragment_to_selectAddressFragment"
+            app:destination="@id/selectAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/voucherFragment"
+        android:name="com.example.bookstore.ui.voucher.VoucherFragment"
+        android:label="fragment_voucher"
+        tools:layout="@layout/fragment_voucher" />
+    <fragment
+        android:id="@+id/newAddressFragment"
+        android:name="com.example.bookstore.ui.new_address.NewAddressFragment"
+        android:label="fragment_new_address"
+        tools:layout="@layout/fragment_new_address" />
+    <fragment
+        android:id="@+id/selectAddressFragment"
+        android:name="com.example.bookstore.ui.select_address.SelectAddressFragment"
+        android:label="fragment_select_address"
+        tools:layout="@layout/fragment_select_address" >
+        <action
+            android:id="@+id/action_selectAddressFragment_to_newAddressFragment"
+            app:destination="@id/newAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountInformationFragment"
+        android:name="com.example.bookstore.ui.account_infor.AccountInformationFragment"
+        android:label="fragment_account_information"
+        tools:layout="@layout/fragment_account_information" />
 </navigation>

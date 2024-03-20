@@ -11,7 +11,7 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="8dp"
         android:text="All of us"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

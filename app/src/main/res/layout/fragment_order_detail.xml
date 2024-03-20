@@ -249,6 +249,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:nestedScrollingEnabled="false"
                     tools:listitem="@layout/item_product_ordered"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

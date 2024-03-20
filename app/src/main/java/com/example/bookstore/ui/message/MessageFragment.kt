@@ -1,16 +1,16 @@
-package com.example.bookstore.ui.shop_message
+package com.example.bookstore.ui.message
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookstore.base.BaseFragment
 import com.example.bookstore.base.BaseViewModel
-import com.example.bookstore.databinding.FragmentShopMessageBinding
+import com.example.bookstore.databinding.FragmentMessageBinding
 import com.example.bookstore.models.Evaluate
 
 
-class ShopMessageFragment: BaseFragment<FragmentShopMessageBinding>(FragmentShopMessageBinding::inflate) {
+class MessageFragment: BaseFragment<FragmentMessageBinding>(FragmentMessageBinding::inflate) {
     override val viewModel: BaseViewModel
-        get() = ViewModelProvider(this)[ShopMessageViewModel::class.java]
+        get() = ViewModelProvider(this)[MessageViewModel::class.java]
 
     override fun initData() {
 
@@ -28,10 +28,10 @@ class ShopMessageFragment: BaseFragment<FragmentShopMessageBinding>(FragmentShop
         )
         binding.apply {
 
-            val listAdapterShopMessage = ListAdapterShopMessage()
+            val listAdapterMessage = ListAdapterMessage()
             recyclerviewListMessage.layoutManager = LinearLayoutManager(root.context)
-            listAdapterShopMessage.submitList(listEvaluate)
-            recyclerviewListMessage.adapter = listAdapterShopMessage
+            listAdapterMessage.submitList(listEvaluate)
+            recyclerviewListMessage.adapter = listAdapterMessage
         }
     }
 

@@ -1,16 +1,16 @@
 package com.example.bookstore.ui.order
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookstore.base.BaseAdapter
 import com.example.bookstore.base.BaseViewHolder
 import com.example.bookstore.databinding.ItemOrderedBinding
-import com.example.bookstore.databinding.ItemProductOrderedBinding
 import com.example.bookstore.models.Evaluate
 import com.example.bookstore.ui.order_detail.ListAdapterProductOrdered
 
-class ListAdapterOrder: BaseAdapter<Evaluate, BaseViewHolder<Evaluate>>(Evaluate.differUtil) {
+class ListAdapterOrder(private val onClickItemOrder: () -> Unit): BaseAdapter<Evaluate, BaseViewHolder<Evaluate>>(Evaluate.differUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Evaluate> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemOrderedBinding.inflate(inflater, parent, false)
@@ -26,13 +26,18 @@ class ListAdapterOrder: BaseAdapter<Evaluate, BaseViewHolder<Evaluate>>(Evaluate
                 Evaluate("2", 1, "Lên top thôi"),
             )
             val listAdapterProductOrdered = ListAdapterProductOrdered()
+
             binding.apply {
-                recyclerviewListItemOrder.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.HORIZONTAL, false)
+                recyclerviewListItemOrder.layoutManager = LinearLayoutManager(root.context)
                 listAdapterProductOrdered.submitList(listEvaluate)
                 recyclerviewListItemOrder.adapter = listAdapterProductOrdered
+
+                root.setOnClickListener {
+                    onClickItemOrder()
+                    Log.e("ấn itme", "bindView: đã ấn tiem ", )
+                }
             }
             binding.btnCancelOrder.setOnClickListener {
-
             }
 
         }

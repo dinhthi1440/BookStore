@@ -8,7 +8,7 @@ import com.example.bookstore.base.BaseViewHolder
 import com.example.bookstore.databinding.ItemListTypeBookBinding
 import com.example.bookstore.models.TypeBook
 
-class ListAdapterBookType:BaseAdapter<TypeBook, BaseViewHolder<TypeBook>>(TypeBook.differUtil) {
+class ListAdapterBookType(private val onClick:(String) -> Unit):BaseAdapter<TypeBook, BaseViewHolder<TypeBook>>(TypeBook.differUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<TypeBook> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListTypeBookBinding.inflate(inflater, parent, false)
@@ -19,14 +19,20 @@ class ListAdapterBookType:BaseAdapter<TypeBook, BaseViewHolder<TypeBook>>(TypeBo
         BaseViewHolder<TypeBook>(binding) {
         override fun bindView(item: TypeBook, isItemSelected: Boolean) {
             super.bindView(item, isItemSelected)
-            val bookInTypeAdapter = ListAdapterBookIntype()
+            val bookInTypeAdapter = ListAdapterBookIntype(::onClickItemBook)
 
             binding.apply {
                 txtvNameTypeBook.text = item.nameOfTypeBook
                 recyclerviewListBook.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.HORIZONTAL, false)
                 bookInTypeAdapter.submitList(item.listBook)
                 recyclerviewListBook.adapter = bookInTypeAdapter
+                txtvShowMore.setOnClickListener {
+                    onClick(txtvNameTypeBook.text.toString())
+                }
             }
+        }
+        private fun onClickItemBook(){
+            onClick("")
         }
     }
 }

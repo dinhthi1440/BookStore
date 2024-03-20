@@ -49,6 +49,9 @@ class CartFragment: BaseFragment<FragmentCartBinding>(FragmentCartBinding::infla
             imgBack.setOnClickListener {
                 findNavController().popBackStack()
             }
+            btnPay.setOnClickListener {
+                findNavController().navigate(R.id.action_cartFragment_to_payFragment)
+            }
 
         }
     }

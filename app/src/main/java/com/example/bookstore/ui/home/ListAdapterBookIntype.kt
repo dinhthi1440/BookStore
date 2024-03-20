@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import com.example.bookstore.base.BaseAdapter
 import com.example.bookstore.base.BaseViewHolder
 import com.example.bookstore.databinding.ItemABookBinding
-import com.example.bookstore.databinding.ItemNameTypeBookBinding
 import com.example.bookstore.models.Book
-import com.example.bookstore.models.TypeBook
 
-class ListAdapterBookIntype: BaseAdapter<Book, BaseViewHolder<Book>>(Book.differUtil) {
+class ListAdapterBookIntype(private val onClickItemBook: () -> Unit): BaseAdapter<Book, BaseViewHolder<Book>>(Book.differUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Book> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemABookBinding.inflate(inflater, parent, false)
@@ -23,6 +21,9 @@ class ListAdapterBookIntype: BaseAdapter<Book, BaseViewHolder<Book>>(Book.differ
             binding.apply {
                 txtvNameBook.text = item.nameOfBook
                 txtvPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
+                root.setOnClickListener {
+                    onClickItemBook()
+                }
             }
         }
     }

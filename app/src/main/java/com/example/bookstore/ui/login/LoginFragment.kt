@@ -32,22 +32,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            /*val email = binding.textipEmail.text.toString()
+            val email = binding.textipEmail.text.toString()
             val password = binding.textipPassword.text.toString()
-            if(email.isNotEmpty() && password.isNotEmpty()){
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(){
-                        if(it.isSuccessful){
-                            dialog?.openDlSuccess()
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                            }, 2000)
-                        }else{
-                            Toast.makeText(context, "lỗi ${it.exception}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            }else{
-            }*/
+//            if(email.isNotEmpty() && password.isNotEmpty()){
+//                auth.signInWithEmailAndPassword(email, password)
+//                    .addOnCompleteListener(){
+//                        if(it.isSuccessful){
+//                            context?.let { it1 -> dialog(it1)?.openDlSuccess() }
+//                            Handler(Looper.getMainLooper()).postDelayed({
+//                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+//                            }, 2000)
+//                        }else{
+//                            Toast.makeText(context, "lỗi ${it.exception}", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//            }else{
+//            }
         }
     }
 
