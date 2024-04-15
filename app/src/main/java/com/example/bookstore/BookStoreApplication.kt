@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.example.bookstore.di.dataBaseModule
 import com.example.bookstore.di.dataSourceModule
-import com.example.bookstore.di.reponsitoryModule
+import com.example.bookstore.di.repositoryModule
 import com.example.bookstore.di.sharedPreferencesModule
 import com.example.bookstore.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -18,11 +18,12 @@ class BookStoreApplication: Application() {
             androidContext(this@BookStoreApplication)
             modules(
                 dataBaseModule,
-                reponsitoryModule,
+                repositoryModule,
                 viewModelModule,
                 sharedPreferencesModule,
                 dataSourceModule
             )
         }
     }
+
 }

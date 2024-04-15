@@ -20,16 +20,16 @@ class NotifyFragment :BaseFragment<FragmentNotifyBinding>(FragmentNotifyBinding:
     }
 
     override fun bindData() {
-        val listEvaluate = listOf(
-            Evaluate("1", 1, "Truyện đẹp"),
-            Evaluate("2", 1, "Lên top thôi"),
-            Evaluate("3", 1, "Truyện hay lắm"),
-        )
+//        val listEvaluate = listOf(
+//            Evaluate("1", 1, "Truyện đẹp"),
+//            Evaluate("2", 1, "Lên top thôi"),
+//            Evaluate("3", 1, "Truyện hay lắm"),
+//        )
         binding.apply {
 
             val listAdapterNotification = ListAdapterNotification()
             recyclerviewListNotify.layoutManager = LinearLayoutManager(root.context)
-            listAdapterNotification.submitList(listEvaluate)
+            //listAdapterNotification.submitList(listEvaluate)
             recyclerviewListNotify.adapter = listAdapterNotification
         }
     }

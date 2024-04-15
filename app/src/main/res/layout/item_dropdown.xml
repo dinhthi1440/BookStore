@@ -1,0 +1,7 @@
+<TextView android:id="@+id/acpt_gender"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Giới tính"
+    android:padding="16dp"
+    android:textSize="14sp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

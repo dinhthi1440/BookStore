@@ -1,5 +1,6 @@
 package com.example.bookstore.extensions
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color.TRANSPARENT
 import android.graphics.drawable.ColorDrawable
@@ -8,10 +9,16 @@ import android.os.Looper
 import android.view.WindowManager
 import android.view.Gravity
 import android.graphics.Color
+import android.graphics.Paint
+import android.view.View
+import com.bumptech.glide.Glide
 import com.example.bookstore.R
+import com.example.bookstore.databinding.DlAnimationLoadingBinding
 import com.example.bookstore.databinding.DlAnimationSuccessBinding
+import com.example.bookstore.databinding.DlConfirmCancelOrderBinding
 import com.example.bookstore.databinding.DlConfirmPasswordBinding
 import com.example.bookstore.databinding.DlConfirmingPurchaseQuaniyBinding
+import com.example.bookstore.models.Book
 
 fun Dialog.openDlSuccess(stopFlag: Boolean = false) {
     val binding = DlAnimationSuccessBinding.inflate(layoutInflater)
@@ -34,8 +41,25 @@ fun Dialog.openDlSuccess(stopFlag: Boolean = false) {
     setCancelable(stopFlag)
     show()
 }
+fun Dialog.openDlLoading(stopFlag: Boolean) {
+    val binding = DlAnimationLoadingBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    window?.apply {
+        setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+        attributes.apply {
+            gravity = Gravity.CENTER
+        }
+    }
+    show()
+    setCancelable(stopFlag)
+}
 
-fun Dialog.confirmNumberPurchase(){
+@SuppressLint("SetTextI18n")
+fun Dialog.confirmNumberPurchase(book: Book, callback: (quantity: Int) -> Unit){
     val binding = DlConfirmingPurchaseQuaniyBinding.inflate(layoutInflater)
     setContentView(binding.root)
     show()
@@ -62,8 +86,22 @@ fun Dialog.confirmNumberPurchase(){
             quanity += 1
             txtvQuantity.text = quanity.toString()
         }
+        if(book.rating != 0.0){
+            txtvPromotionPercent.text = "-" + book.rating.toString() + "%"
+            txtvPrice.text = book.price.toString() +"đ"
+            txtvPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
+            txtvSellingPrice.text = (book.price * (100.0-book.rating) /100.0).toInt().toString() +"đ"
+        }else{
+            txtvPromotionPercent.visibility = View.GONE
+            txtvPrice.visibility = View.GONE
+            txtvSellingPrice.text = book.price.toString() +"đ"
+        }
+        Glide.with(root.rootView)
+            .load(book.images[0])
+            .into(imgBook)
     }
     binding.btnConfirm.setOnClickListener {
+        callback(binding.txtvQuantity.text.toString().toInt())
         this.dismiss()
     }
 }
@@ -92,3 +130,26 @@ fun Dialog.confirmPassword(pressButton: (String) -> Unit) {
     show()
 }
 
+fun Dialog.confirmCancelOrder(pressButton: (String) -> Unit) {
+    val binding = DlConfirmCancelOrderBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    window?.apply {
+        setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+        attributes.apply {
+            gravity = Gravity.CENTER
+        }
+    }
+
+    binding.layoutBtnYes.setOnClickListener {
+        pressButton("yes")
+        this.dismiss()
+    }
+    binding.layoutBtnNo.setOnClickListener {
+        this.dismiss()
+    }
+    show()
+}

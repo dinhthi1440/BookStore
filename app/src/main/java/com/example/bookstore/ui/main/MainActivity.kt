@@ -45,4 +45,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //            binding.navView.isVisible = isVisible
 //        }
     }
+
+
 }

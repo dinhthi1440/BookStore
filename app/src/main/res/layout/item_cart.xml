@@ -6,10 +6,9 @@
     android:layout_margin="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RadioButton
-        android:backgroundTint="@color/cus_orange_warning"
-        android:id="@+id/radioButton"
-        android:layout_width="40dp"
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,11 +26,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/radioButton"
+        app:layout_constraintStart_toEndOf="@+id/checkbox"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+            android:id="@+id/img_book"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/dac_nhan_tam_book" />
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txtv_promotional_price"
+        android:id="@+id/txtv_selling_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="52.000đ"
@@ -80,10 +80,10 @@
         android:text="86.000đ"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtv_promotional_price"
+        app:layout_constraintEnd_toEndOf="@+id/txtv_selling_price"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtv_promotional_price"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_promotional_price"
+        app:layout_constraintStart_toStartOf="@+id/txtv_selling_price"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_selling_price"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -108,9 +108,9 @@
         android:layout_marginTop="8dp"
         android:text="Số lượng"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtv_price"
+        app:layout_constraintEnd_toEndOf="@+id/txtv_name_book"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtv_price"
+        app:layout_constraintStart_toStartOf="@+id/txtv_name_book"
         app:layout_constraintTop_toBottomOf="@+id/txtv_price"
         app:layout_constraintVertical_bias="0.0" />
 

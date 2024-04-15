@@ -21,16 +21,16 @@ class MessageFragment: BaseFragment<FragmentMessageBinding>(FragmentMessageBindi
     }
 
     override fun bindData() {
-        val listEvaluate = listOf(
-            Evaluate("1", 1, "Truyện đẹp"),
-            Evaluate("2", 1, "Lên top thôi"),
-            Evaluate("3", 1, "Truyện hay lắm"),
-        )
+//        val listEvaluate = listOf(
+//            Evaluate("1", 1, "Truyện đẹp", mutableListOf()),
+//            Evaluate("2", 1, "Lên top thôi", mutableListOf()),
+//            Evaluate("3", 1, "Truyện hay lắm"),
+//        )
         binding.apply {
 
             val listAdapterMessage = ListAdapterMessage()
             recyclerviewListMessage.layoutManager = LinearLayoutManager(root.context)
-            listAdapterMessage.submitList(listEvaluate)
+            //listAdapterMessage.submitList(listEvaluate)
             recyclerviewListMessage.adapter = listAdapterMessage
         }
     }

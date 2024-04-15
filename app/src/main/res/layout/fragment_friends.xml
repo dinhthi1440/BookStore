@@ -58,10 +58,25 @@
         android:id="@+id/recyclerview_list_evaluate_newsfeed"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
         tools:listitem="@layout/item_evaluate_new_feed" />
+
+    <TextView
+        android:id="@+id/txtv_no_data"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Chưa có đánh giá nào của bạn bè, hãy kết bạn thêm nhé!"
+        android:textAlignment="center"
+        android:textColor="@color/text_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

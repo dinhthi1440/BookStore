@@ -22,6 +22,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+            android:id="@+id/img_book"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/dac_nhan_tam_book" />
@@ -49,7 +50,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txtv_promotional_price"
+        android:id="@+id/txtvSellingPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="52.000đ"
@@ -70,10 +71,10 @@
         android:text="86.000đ"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtv_promotional_price"
+        app:layout_constraintEnd_toEndOf="@+id/txtvSellingPrice"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtv_promotional_price"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_promotional_price"
+        app:layout_constraintStart_toStartOf="@+id/txtvSellingPrice"
+        app:layout_constraintTop_toBottomOf="@+id/txtvSellingPrice"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -98,9 +99,9 @@
         android:layout_marginTop="8dp"
         android:text="Số lượng"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtv_price"
+        app:layout_constraintEnd_toEndOf="@+id/txtv_name_book"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtv_price"
+        app:layout_constraintStart_toStartOf="@+id/txtv_name_book"
         app:layout_constraintTop_toBottomOf="@+id/txtv_price"
         app:layout_constraintVertical_bias="0.0" />
 

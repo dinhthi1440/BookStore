@@ -98,6 +98,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
+                    android:id="@+id/txtv_status_order_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -300,9 +301,10 @@
 
                     <TextView
                         android:id="@+id/txtv_notify_total"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
                         android:text="Vui lòng thanh toán 500.000đ khi nhận hàng"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -356,6 +358,7 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
+                        android:id="@+id/txtv_pay_method"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -461,7 +464,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="5dp"
-                        android:text="17/03/2024"
+                        android:text=""
                         app:layout_constraintBottom_toBottomOf="@+id/txtv3"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"

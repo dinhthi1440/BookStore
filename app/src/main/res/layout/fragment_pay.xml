@@ -63,6 +63,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
+                    android:id="@+id/imageView16"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_marginEnd="8dp"
@@ -75,11 +76,11 @@
 
 
                 <TextView
-                    android:id="@+id/txtv_username_and_numberphone"
+                    android:id="@+id/txtv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Đinh Văn Thi | 0326872924"
+                    android:text="Đinh Văn Thi"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -91,6 +92,20 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
+                    android:id="@+id/txtv_number_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="0326872924"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtv_username"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView16"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/txtv_username"
+                    app:layout_constraintTop_toTopOf="@+id/txtv_username" />
+
+                <TextView
                     android:id="@+id/txtv_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -99,8 +114,8 @@
                     android:text="Số nhà 68, Ngõ 59 Đường Văn Tiến Dũng, Phường Phúc Diễn, Quận Bắc Từ Liêm, Hà Nội"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtv_username_and_numberphone"
-                    app:layout_constraintTop_toBottomOf="@+id/txtv_username_and_numberphone"
+                    app:layout_constraintStart_toStartOf="@+id/txtv_username"
+                    app:layout_constraintTop_toBottomOf="@+id/txtv_username"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,6 +169,7 @@
                     app:layout_constraintStart_toEndOf="@+id/imageView10"
                     app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout19"
                     android:layout_width="match_parent"
@@ -178,8 +194,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioButton
-                        android:id="@+id/radio_btn_cash"
+                    <CheckBox
+                        android:id="@+id/checkbox_btn_cash"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -203,26 +219,25 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <TextView
-                        android:id="@+id/textView27"
+                        android:id="@+id/txtv_btn_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thẻ ngân hàng"
-                        app:layout_constraintBottom_toBottomOf="@+id/radio_btn_cash1"
+                        app:layout_constraintBottom_toBottomOf="@+id/checkbox_btn_cash1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/radio_btn_cash1" />
+                        app:layout_constraintTop_toTopOf="@+id/checkbox_btn_cash1" />
 
-                    <RadioButton
-                        android:id="@+id/radio_btn_cash1"
+                    <CheckBox
+                        android:id="@+id/checkbox_btn_cash1"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/textView27"
+                        app:layout_constraintStart_toEndOf="@+id/txtv_btn_card"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
 
@@ -237,8 +252,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/radio_btn_cash1"
-                        app:layout_constraintVertical_bias="0.0">
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_btn_cash1">
 
                         <TextView
                             android:id="@+id/txtv_bank_name"
@@ -277,10 +291,12 @@
                             app:layout_constraintTop_toTopOf="@+id/txtv_number_bank" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout21"
+                android:id="@+id/layout_voucher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -325,7 +341,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout21"
+                app:layout_constraintTop_toBottomOf="@+id/layout_voucher"
                 app:layout_constraintVertical_bias="0.0">
 
                 <ImageView
@@ -481,7 +497,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/layout_order"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="#FF0000"
@@ -507,13 +523,14 @@
             android:layout_marginEnd="8dp"
             android:text="Tổng thanh toán"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toStartOf="@+id/layout_order"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/txtv_total_price_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"

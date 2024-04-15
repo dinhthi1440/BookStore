@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:background="#f5f5fa"
     tools:context=".ui.book_detail.BookDetailFragment">
-
-
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,16 +19,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
+            <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:src="@drawable/dac_nhan_tam_book"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textview"
@@ -91,7 +88,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView4" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txtv_selling_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -117,11 +114,11 @@
                     android:layout_marginEnd="16dp"
                     android:ellipsize="end"
                     android:text="86.000đ"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtv_selling_price"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/textView5" />
+                    app:layout_constraintStart_toEndOf="@+id/txtv_selling_price"
+                    app:layout_constraintTop_toTopOf="@+id/txtv_selling_price" />
 
                 <TextView
                     android:id="@+id/txtv_promotion_percent"
@@ -150,11 +147,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtv_selling_price"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/txtv_average_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -172,11 +169,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:text="Đã bán: "
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtv_average_star"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="@+id/textView3" />
+                    app:layout_constraintStart_toEndOf="@+id/txtv_average_star"
+                    app:layout_constraintTop_toTopOf="@+id/txtv_average_star" />
 
                 <TextView
                     android:id="@+id/txtv_number_selled"
@@ -189,12 +186,13 @@
                     app:layout_constraintStart_toEndOf="@+id/textView6"
                     app:layout_constraintTop_toTopOf="@+id/textView6" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/img_favourite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/heart_grey"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintBottom_toBottomOf="@+id/txtv_number_selled"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -231,18 +229,14 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txtv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="4dp"
-                    android:text="Đắc nhân tâm – How to win friends and Influence
-                    People  của Dale Carnegie là quyển sách nổi tiếng nhất,
-                    bán chạy nhất và có tầm ảnh hưởng nhất của mọi thời đại.
-                    Tác phẩm đã được chuyển ngữ sang hầu hết các thứ tiếng
-                    trên thế giới và có mặt ở hàng trăm quốc gia."
+                    android:text=""
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -285,6 +279,7 @@
                     android:layout_height="100dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:columnCount="2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -299,6 +294,7 @@
                         android:text="Thể loại" />
 
                     <TextView
+                        android:id="@+id/txtv_genre"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -323,6 +319,7 @@
                         android:text="Nhà xuất bản" />
 
                     <TextView
+                        android:id="@+id/txtv_publisher"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -343,15 +340,91 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout6"
+                android:id="@+id/constraintLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_box_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+                app:layout_constraintVertical_bias="0.0">
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Xếp hạng đánh giá cho sản phẩm này"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cho người khác biết suy nghĩ của bạn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView43"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1"
+                    android:scaleY="0.8"
+                    android:scaleX="0.8"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView44"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/txtv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Viết bài đánh giá"
+                    android:textSize="15sp"
+                    android:textColor="#2BA1FF"
+                    android:textStyle="bold"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_box_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
                 app:layout_constraintVertical_bias="0.0">
 
                 <TextView
@@ -371,19 +444,80 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
+                <TextView
+                    android:id="@+id/txtv_average_star_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/appCompatRatingBar"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatRatingBar"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/appCompatRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-30dp"
+                    android:rating="0"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:isIndicator="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtv_average_star_rating"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-45dp"
+                    android:layout_marginEnd="8dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatRatingBar"
+                    app:layout_constraintTop_toTopOf="@+id/txtv_average_star_rating"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:listitem="@layout/item_rating_bar">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/txtv_totalRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatRatingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/appCompatRatingBar"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatRatingBar"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatRatingBar"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_list_evaluate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
+                    android:nestedScrollingEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10"
-                    tools:listitem="@layout/item_book_evaluate" />
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                    app:layout_constraintVertical_bias="1.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -420,12 +554,12 @@
                     android:layout_marginEnd="8dp"
                     android:background="#F4F4F4"
                     android:orientation="horizontal"
+                    android:nestedScrollingEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtv_name_type_book"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:listitem="@layout/item_a_book" />
+                    app:layout_constraintVertical_bias="0.0"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -433,6 +567,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/layout_shopping"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -441,7 +576,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
         <LinearLayout
             android:id="@+id/order"
             android:background="#009688"
@@ -488,6 +622,49 @@
                 android:text="Mua ngay" />
         </LinearLayout>
     </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_stroke_top_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_comment"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" >
+
+        <EditText
+            android:id="@+id/edt_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_comment_circle_grey"
+            android:hint="Viết bình luận"
+            android:paddingVertical="4dp"
+            android:paddingStart="8dp"
+            android:maxLines="4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_send"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/send"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edt_comment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

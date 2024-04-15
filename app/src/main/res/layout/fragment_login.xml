@@ -33,6 +33,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_email"
                 app:startIconDrawable="@drawable/baseline_mail_24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -44,6 +45,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_password"
                 android:layout_marginTop="20dp"
                 app:startIconDrawable="@drawable/baseline_lock_24"
                 android:layout_width="match_parent"

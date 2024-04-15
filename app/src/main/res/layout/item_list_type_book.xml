@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Xem thêm"
+        android:background="?attr/selectableItemBackground"
         android:textColor="@color/text_red"
         app:layout_constraintBottom_toBottomOf="@+id/txtv_name_type_book"
         app:layout_constraintEnd_toEndOf="parent"

@@ -138,19 +138,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/edittext_sex"
+            <Spinner
+                android:id="@+id/acpt_gender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_stroke_grey_left_box"
-                android:hint="Giới tính"
-                android:paddingVertical="4dp"
-                android:paddingStart="10dp"
-                android:editable="false"
                 android:textSize="14sp"
-                android:drawableEnd="@drawable/down_icon_16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
@@ -224,6 +219,7 @@
             android:id="@+id/constraintLayout27"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -259,6 +255,7 @@
                 android:paddingVertical="4dp"
                 android:paddingStart="10dp"
                 android:textSize="14sp"
+                android:inputType="textEmailAddress"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"
@@ -266,7 +263,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout28"
+            android:id="@+id/layout_phone_number"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -304,6 +301,7 @@
                 android:paddingVertical="4dp"
                 android:paddingStart="10dp"
                 android:textSize="14sp"
+                android:inputType="phone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView15"
@@ -322,7 +320,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout28"
+            app:layout_constraintTop_toBottomOf="@+id/layout_phone_number"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

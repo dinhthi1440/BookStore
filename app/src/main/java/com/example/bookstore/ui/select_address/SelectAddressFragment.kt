@@ -31,15 +31,15 @@ class SelectAddressFragment
     }
 
     override fun bindData() {
-        val listEvaluate = listOf(
-            Evaluate("1", 1, "Truyện đẹp"),
-            Evaluate("2", 1, "Lên top thôi"),
-        )
+//        val listEvaluate = listOf(
+//            Evaluate("1", 1, "Truyện đẹp"),
+//            Evaluate("2", 1, "Lên top thôi"),
+//        )
         binding.apply {
 
             val listAdapterAddress = ListAdapterAddress()
             recyclerViewListAddress.layoutManager = LinearLayoutManager(root.context)
-            listAdapterAddress.submitList(listEvaluate)
+            //listAdapterAddress.submitList(listEvaluate)
             recyclerViewListAddress.adapter = listAdapterAddress
 
         }

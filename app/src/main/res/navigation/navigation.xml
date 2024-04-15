@@ -15,8 +15,7 @@
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -60,6 +59,9 @@
         <action
             android:id="@+id/action_settingFragment_to_accountInformationFragment"
             app:destination="@id/accountInformationFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendsFragment"
@@ -69,6 +71,15 @@
         <action
             android:id="@+id/action_friendsFragment_to_shopMessageFragment"
             app:destination="@id/shopMessageFragment" />
+        <action
+            android:id="@+id/action_friendsFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+        <action
+            android:id="@+id/action_friendsFragment_to_replyRatingFragment"
+            app:destination="@id/replyRatingFragment" />
+        <action
+            android:id="@+id/action_friendsFragment_to_listFriendsFragment"
+            app:destination="@id/listFriendsFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookDetailFragment"
@@ -81,6 +92,12 @@
         <action
             android:id="@+id/action_bookDetailFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_replyRatingFragment"
+            app:destination="@id/replyRatingFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -110,12 +127,20 @@
         android:id="@+id/shopMessageFragment"
         android:name="com.example.bookstore.ui.message.MessageFragment"
         android:label="fragment_shop_message"
-        tools:layout="@layout/fragment_message" />
+        tools:layout="@layout/fragment_message" >
+        <action
+            android:id="@+id/action_shopMessageFragment_to_chattingFragment"
+            app:destination="@id/chattingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/showAllBookFragment"
         android:name="com.example.bookstore.ui.show_all_book.ShowAllBookFragment"
         android:label="fragment_show_all_book"
-        tools:layout="@layout/fragment_show_all_book" />
+        tools:layout="@layout/fragment_show_all_book" >
+        <action
+            android:id="@+id/action_showAllBookFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/payFragment"
         android:name="com.example.bookstore.ui.pay.PayFragment"
@@ -124,6 +149,9 @@
         <action
             android:id="@+id/action_payFragment_to_selectAddressFragment"
             app:destination="@id/selectAddressFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
     </fragment>
     <fragment
         android:id="@+id/voucherFragment"
@@ -149,4 +177,34 @@
         android:name="com.example.bookstore.ui.account_infor.AccountInformationFragment"
         android:label="fragment_account_information"
         tools:layout="@layout/fragment_account_information" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.bookstore.ui.change_password.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.example.bookstore.ui.rating.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" />
+    <fragment
+        android:id="@+id/replyRatingFragment"
+        android:name="com.example.bookstore.ui.reply_rating.ReplyRatingFragment"
+        android:label="fragment_reply_rating"
+        tools:layout="@layout/fragment_reply_rating" />
+    <fragment
+        android:id="@+id/listFriendsFragment"
+        android:name="com.example.bookstore.ui.my_friends.ListFriendsFragment"
+        android:label="fragment_list_friends"
+        tools:layout="@layout/fragment_list_friends" >
+        <action
+            android:id="@+id/action_listFriendsFragment_to_chattingFragment"
+            app:destination="@id/chattingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingFragment"
+        android:name="com.example.bookstore.ui.chatting.ChattingFragment"
+        android:label="fragment_chatting"
+        tools:layout="@layout/fragment_chatting" />
+
 </navigation>

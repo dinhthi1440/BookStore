@@ -8,6 +8,8 @@
     android:gravity="center"
     tools:context=".ui.home.HomeFragment">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -41,6 +43,7 @@
                 android:drawableStart="@drawable/search_icon_16"
                 android:drawablePadding="8dp"
                 android:hint="Đắc nhân tâm"
+                android:focusableInTouchMode="true"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textSize="13sp"
@@ -71,6 +74,7 @@
             android:layout_width="55dp"
             android:layout_height="50dp"
             android:padding="12dp"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/baseline_add_shopping_cart_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +100,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <ImageView
@@ -116,6 +121,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <ImageView
@@ -136,6 +142,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <ImageView
@@ -157,6 +164,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <ImageView

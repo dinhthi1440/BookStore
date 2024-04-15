@@ -63,7 +63,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/xtv_expiry_date"
+            android:id="@+id/txtv_expiry_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -78,6 +78,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/txtv_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -89,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/xtv_expiry_date" />
+            app:layout_constraintTop_toBottomOf="@+id/txtv_expiry_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
