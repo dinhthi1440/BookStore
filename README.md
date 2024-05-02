@@ -1,4 +1,8 @@
 ## BookStore ( Project Android )
+
+## Description
+The application allows users to buy, view, review books and exchange information about books with each other
+
 ## Tech
 • Architecture: MVVM Clean Architecture && LiveData <br>
 • Dependency Injection: Koin. <br>
