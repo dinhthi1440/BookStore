@@ -7,7 +7,7 @@ data class Cart(
     val cardID: String,
     val userID: String,
     val book: Book,
-    val quantity: Int,
+    var quantity: Int,
 ):Serializable{
     constructor() : this("","", Book(),  0)
     companion object{

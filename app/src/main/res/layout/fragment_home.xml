@@ -35,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:id="@+id/edittext_search"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="3dp"
@@ -47,6 +48,7 @@
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textSize="13sp"
+                android:focusable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="parent"

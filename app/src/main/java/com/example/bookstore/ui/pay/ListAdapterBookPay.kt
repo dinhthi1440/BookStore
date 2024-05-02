@@ -13,25 +13,18 @@ import com.example.bookstore.databinding.ItemProductOrderedBinding
 import com.example.bookstore.models.Cart
 import com.example.bookstore.models.Evaluate
 
-class ListAdapterBookPay(private val listCart: (List<Cart>, Double) -> Unit): BaseAdapter<Cart,
+class ListAdapterBookPay(private val onUpdatePayment: (Cart) -> Unit): BaseAdapter<Cart,
         BaseViewHolder<Cart>>(Cart.differUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Cart> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemOrderPayBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
-    private var _listCartSelected: MutableList<Cart> = mutableListOf()
-    private var _totalPrice: Double = 0.0
-    private var first = true
     inner class ViewHolder(val binding: ItemOrderPayBinding) :
         BaseViewHolder<Cart>(binding) {
         @SuppressLint("SetTextI18n")
         override fun bindView(item: Cart, isItemSelected: Boolean) {
             super.bindView(item, isItemSelected)
-            val isTonTai = _listCartSelected.any { it.cardID == item.cardID }
-            if (!isTonTai) {
-                _listCartSelected.add(item)
-            }
             binding.apply {
                 var sellingPrice =0.0
                 binding.apply {
@@ -54,27 +47,14 @@ class ListAdapterBookPay(private val listCart: (List<Cart>, Double) -> Unit): Ba
                         if(quantity > 1){
                             quantity -= 1
                             txtvQuantity.text = quantity.toString()
-                            val existingItems = _listCartSelected.filter { it.cardID == item.cardID }
-                            _listCartSelected.removeAll(existingItems)
-                            _listCartSelected.add(Cart(item.cardID, item.userID, item.book, quantity))
-                            _totalPrice -= sellingPrice
-                            listCart(_listCartSelected, _totalPrice)
+                            onUpdatePayment(Cart(item.cardID, item.userID, item.book, quantity))
                         }
                     }
                     btnPlus.setOnClickListener {
                         quantity += 1
                         txtvQuantity.text = quantity.toString()
-                        val existingItems = _listCartSelected.filter { it.cardID == item.cardID }
-                        _listCartSelected.removeAll(existingItems)
-                        _listCartSelected.add(Cart(item.cardID, item.userID, item.book, quantity))
-                        _totalPrice += sellingPrice
-                        listCart(_listCartSelected, _totalPrice)
+                        onUpdatePayment(Cart(item.cardID, item.userID, item.book, quantity))
                     }
-                    if (first){
-                        _totalPrice += quantity * sellingPrice
-                        first=false
-                    }
-                    listCart(_listCartSelected, _totalPrice)
             } }
 
         }

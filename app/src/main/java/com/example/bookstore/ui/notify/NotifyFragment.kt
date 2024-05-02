@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookstore.base.BaseFragment
 import com.example.bookstore.base.BaseViewModel
 import com.example.bookstore.databinding.FragmentNotifyBinding
+import com.example.bookstore.extensions.getUserID
 import com.example.bookstore.models.Evaluate
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotifyFragment :BaseFragment<FragmentNotifyBinding>(FragmentNotifyBinding::inflate){
-    override val viewModel: BaseViewModel
-        get() = ViewModelProvider(this)[NotifyViewModel::class.java]
+    override val viewModel by viewModel<NotifyViewModel>()
 
     override fun initData() {
 
@@ -20,17 +21,14 @@ class NotifyFragment :BaseFragment<FragmentNotifyBinding>(FragmentNotifyBinding:
     }
 
     override fun bindData() {
-//        val listEvaluate = listOf(
-//            Evaluate("1", 1, "Truyện đẹp"),
-//            Evaluate("2", 1, "Lên top thôi"),
-//            Evaluate("3", 1, "Truyện hay lắm"),
-//        )
+        viewModel.getNotify(sharedPreferences.getUserID()!!)
+        val listAdapterNotification = ListAdapterNotification()
         binding.apply {
-
-            val listAdapterNotification = ListAdapterNotification()
-            recyclerviewListNotify.layoutManager = LinearLayoutManager(root.context)
-            //listAdapterNotification.submitList(listEvaluate)
-            recyclerviewListNotify.adapter = listAdapterNotification
+            viewModel.getNotifyResult.observe(viewLifecycleOwner){
+                recyclerviewListNotify.layoutManager = LinearLayoutManager(root.context)
+                listAdapterNotification.submitList(it)
+                recyclerviewListNotify.adapter = listAdapterNotification
+            }
         }
     }
 

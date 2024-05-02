@@ -17,7 +17,7 @@ import com.example.bookstore.models.Book
 import com.example.bookstore.models.Cart
 import com.example.bookstore.models.Evaluate
 
-class ListAdapterCart(private val totalPrice: (Double) -> Unit, private val totalQuantities: (Int, List<Cart>) -> Unit)
+class ListAdapterCart(private val onUpdateCarts: (Cart, String) -> Unit)
     : BaseAdapter<Cart, BaseViewHolder<Cart>>(Cart.differUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Cart> {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,12 +25,8 @@ class ListAdapterCart(private val totalPrice: (Double) -> Unit, private val tota
         return ViewHolder(binding)
     }
 
-    private var _totalPrice: Double = 0.0
-    private var _totalQuantity: Int = 0
-    private var _listCartSelected: MutableList<Cart> = mutableListOf()
     inner class ViewHolder(val binding: ItemCartBinding) :
         BaseViewHolder<Cart>(binding) {
-
         @SuppressLint("SetTextI18n")
         override fun bindView(item: Cart, isItemSelected: Boolean) {
             super.bindView(item, isItemSelected)
@@ -40,8 +36,8 @@ class ListAdapterCart(private val totalPrice: (Double) -> Unit, private val tota
                 txtvNameBook.text = item.book.title
                 Glide.with(root.rootView).load(item.book.images[0]).into(imgBook)
                 if(item.book.rating != 0.0){
-                    txtvPromotionPercent.text = "-" + item.book.rating.toString() + "%"
-                    txtvPrice.text = item.book.price.toString() +"đ"
+                    txtvPromotionPercent.text = "-" + decimalFormat.format(item.book.rating).toString() + "%"
+                    txtvPrice.text = decimalFormat.format(item.book.price).toString() +"đ"
                     txtvPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
                     sellingPrice = (item.book.price * (100.0-item.book.rating) /100.0)
                 }else{
@@ -49,15 +45,14 @@ class ListAdapterCart(private val totalPrice: (Double) -> Unit, private val tota
                     txtvPrice.visibility = View.GONE
                     sellingPrice = item.book.price
                 }
-                txtvSellingPrice.text = sellingPrice.toString() + "đ"
+                txtvSellingPrice.text = decimalFormat.format(sellingPrice).toString() + "đ"
                 var quantity = txtvQuantity.text.toString().toInt()
                 btnMinus.setOnClickListener {
                     if(quantity > 1){
                         quantity -= 1
                         txtvQuantity.text = quantity.toString()
                         if(checkbox.isChecked){
-                            _totalPrice -= sellingPrice
-                            totalPrice(_totalPrice)
+                            onUpdateCarts(Cart(item.cardID, item.userID, item.book, quantity), "plusAndMinus")
                         }
                     }
                 }
@@ -65,25 +60,14 @@ class ListAdapterCart(private val totalPrice: (Double) -> Unit, private val tota
                     quantity += 1
                     txtvQuantity.text = quantity.toString()
                     if(checkbox.isChecked){
-                        _totalPrice += sellingPrice
-                        totalPrice(_totalPrice)
+                        onUpdateCarts(Cart(item.cardID, item.userID, item.book, quantity), "plusAndMinus")
                     }
                 }
                 checkbox.setOnCheckedChangeListener { _, isChecked ->
                     if(isChecked){
-                        _totalPrice += quantity * sellingPrice
-                        totalPrice(_totalPrice)
-                        _totalQuantity+=1
-                        _listCartSelected.add(Cart(
-                            item.cardID, item.userID, item.book, quantity
-                        ))
-                        totalQuantities(_totalQuantity, _listCartSelected)
+                        onUpdateCarts(Cart(item.cardID, item.userID, item.book, quantity), "addSelect")
                     }else{
-                        _totalPrice -= quantity * sellingPrice
-                        totalPrice(_totalPrice)
-                        _totalQuantity-=1
-                        _listCartSelected.remove(item)
-                        totalQuantities(_totalQuantity, _listCartSelected)
+                        onUpdateCarts(Cart(item.cardID, item.userID, item.book, quantity), "removeSelect")
                     }
                 }
             }

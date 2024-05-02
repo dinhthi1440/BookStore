@@ -24,4 +24,13 @@ class HomeRepository(private val cloud: IFirebaseSource.CloudStore): BaseReponsi
         return getResult { cloud.addUser(user) }
     }
 
+    override suspend fun getUserByCusID(customerID: String): DataResult<User> {
+        return getResult { cloud.getUserByCusID(customerID) }
+    }
+
+    override suspend fun addFriends(userID: String, friendID: String): DataResult<Int> {
+        return getResult { cloud.addFriends(userID, friendID) }
+    }
+
+
 }

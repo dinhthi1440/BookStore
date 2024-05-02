@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import java.text.DecimalFormat
 import java.util.concurrent.Executors
 
 
@@ -18,6 +19,7 @@ ListAdapter<T, VH>(
     private var recyclerView: RecyclerView? = null
     private var layoutNoData: View? = null
     private var enableShowNoDataUI = false
+    protected val decimalFormat = DecimalFormat("#,###.###")
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)

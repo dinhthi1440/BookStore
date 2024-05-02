@@ -12,6 +12,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="14:30"
+        android:textSize="10sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/edittext_show_mess"
+    <TextView
+        android:id="@+id/txtv_show_mess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -29,8 +30,9 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/bg_chat_right"
         android:paddingHorizontal="14dp"
-        android:paddingVertical="6dp"
+        android:paddingVertical="10dp"
         android:text="Hello world!"
+
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

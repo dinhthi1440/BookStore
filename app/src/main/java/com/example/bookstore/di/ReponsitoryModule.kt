@@ -1,9 +1,13 @@
 package com.example.bookstore.di
 
+import com.example.bookstore.data.repository.address.AddressRepository
+import com.example.bookstore.data.repository.address.IAddressRepository
 import com.example.bookstore.data.repository.book_detail.BookDetailRepository
 import com.example.bookstore.data.repository.book_detail.IBookDetailRepository
 import com.example.bookstore.data.repository.carts.CartRepository
 import com.example.bookstore.data.repository.carts.ICartRepository
+import com.example.bookstore.data.repository.chatting.ChattingRepository
+import com.example.bookstore.data.repository.chatting.IChattingRepository
 import com.example.bookstore.data.repository.friends.FriendRepository
 import com.example.bookstore.data.repository.friends.IFriendRepository
 import com.example.bookstore.data.repository.home.HomeRepository
@@ -12,6 +16,8 @@ import com.example.bookstore.data.repository.login.ILoginRepository
 import com.example.bookstore.data.repository.login.LoginRepository
 import com.example.bookstore.data.repository.my_friends.IMyFriendRepository
 import com.example.bookstore.data.repository.my_friends.MyFriendRepository
+import com.example.bookstore.data.repository.notification.INotificationRepository
+import com.example.bookstore.data.repository.notification.NotificationRepository
 import com.example.bookstore.data.repository.order.IOrderRepository
 import com.example.bookstore.data.repository.order.OrderRepository
 import com.example.bookstore.data.repository.pay.IPayRepository
@@ -34,9 +40,12 @@ val repositoryModule = module{
     single<IPayRepository> { PayRepository(get()) }
     single<IOrderRepository> { OrderRepository(get()) }
     single<IRatingRepository> { RatingRepository(get()) }
-    single<ILoginRepository> { LoginRepository(get()) }
+    single<ILoginRepository> { LoginRepository(get(), get()) }
     single<ISettingRepository> { SettingRepository(get(), get(), get()) }
     single<IFriendRepository> { FriendRepository(get()) }
     single<ISignUpRepository> { SignUpRepository(get()) }
     single<IMyFriendRepository> { MyFriendRepository(get()) }
+    single<IChattingRepository> { ChattingRepository(get()) }
+    single<IAddressRepository> { AddressRepository(get()) }
+    single<INotificationRepository> { NotificationRepository(get()) }
 }

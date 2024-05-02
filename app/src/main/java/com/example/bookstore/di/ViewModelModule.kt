@@ -8,10 +8,14 @@ import com.example.bookstore.ui.chatting.ChattingViewModel
 import com.example.bookstore.ui.friends.FriendViewModel
 import com.example.bookstore.ui.home.HomeViewModel
 import com.example.bookstore.ui.login.LoginViewModel
+import com.example.bookstore.ui.message.MessageViewModel
 import com.example.bookstore.ui.my_friends.ListFriendViewModel
+import com.example.bookstore.ui.new_address.NewAddressViewModel
+import com.example.bookstore.ui.notify.NotifyViewModel
 import com.example.bookstore.ui.order.OrderViewModel
 import com.example.bookstore.ui.pay.PayViewModel
 import com.example.bookstore.ui.rating.RatingViewModel
+import com.example.bookstore.ui.select_address.SelectAddressViewModel
 import com.example.bookstore.ui.setting.SettingViewModel
 import com.example.bookstore.ui.signup.SingUpViewModel
 import com.example.bookstore.ui.voucher.VoucherViewModel
@@ -19,13 +23,13 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module{
-    viewModel{LoginViewModel()}
+    viewModel{LoginViewModel(get())}
     viewModel { SingUpViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { BookDetailViewModel(get()) }
     viewModel { CartViewModel(get()) }
     viewModel { VoucherViewModel(get()) }
-    viewModel { PayViewModel(get()) }
+    viewModel { PayViewModel(get(), get()) }
     viewModel { OrderViewModel(get()) }
     viewModel { RatingViewModel(get()) }
     viewModel { SettingViewModel(get()) }
@@ -34,4 +38,8 @@ val viewModelModule = module{
     viewModel { AccountInforVIewModel(get()) }
     viewModel { ChangePassViewModel(get()) }
     viewModel { ChattingViewModel(get()) }
+    viewModel { MessageViewModel(get()) }
+    viewModel { NewAddressViewModel(get()) }
+    viewModel { SelectAddressViewModel(get()) }
+    viewModel { NotifyViewModel(get()) }
 }

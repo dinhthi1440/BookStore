@@ -42,7 +42,6 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBindi
                 Toast.makeText(context, "Thay đổi ảnh thành công", Toast.LENGTH_SHORT).show()
             }
         }
-        
     }
     override fun initData() {
 
@@ -50,6 +49,9 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBindi
 
     override fun handleEvent() {
         binding.apply {
+            imgAvtUser.setOnClickListener {
+                contract.launch("image/*")
+            }
             inforAccount.setOnClickListener {
                 dialog(requireContext()).confirmPassword {
                     val bundle = bundleOf("user" to user)
@@ -79,8 +81,7 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBindi
                         auth.signOut()
                         sharedPreferences.destroyUserID()
                         if(auth.currentUser == null){
-
-                            findNavController().popBackStack()
+                            findNavController().navigate(R.id.action_settingFragment_to_loginFragment)
                         }
                     }
                     .setNegativeButton("Hủy bỏ", null)
@@ -90,7 +91,7 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBindi
     }
 
     override fun bindData() {
-        generateQRCode()
+
         viewModel.getUser(sharedPreferences.getUserID()!!)
         binding.apply {
             viewModel.getUserResult.observe(viewLifecycleOwner){
@@ -98,16 +99,15 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBindi
                 txtvUsername.text = it.userName
                 txtvCustomerCode.text = it.customerCode
                 Glide.with(this@SettingFragment).load(it.imageUser).into(imgAvtUser)
+                generateQRCode(it.customerCode)
             }
-            imgAvtUser.setOnClickListener {
-                contract.launch("image/*")
-            }
+
         }
     }
 
-    private fun generateQRCode(){
+    private fun generateQRCode(customerCode: String){
         try {
-            val bitMatrix = QRCodeWriter().encode(binding.txtvCustomerCode.text.toString(),
+            val bitMatrix = QRCodeWriter().encode(customerCode,
                 BarcodeFormat.QR_CODE, 512, 512)
             val width = bitMatrix.width
             val height = bitMatrix.height

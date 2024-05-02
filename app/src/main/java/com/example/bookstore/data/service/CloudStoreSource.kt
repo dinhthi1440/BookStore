@@ -3,6 +3,7 @@ package com.example.bookstore.data.service
 import android.content.ContentValues
 import android.util.Log
 import com.example.bookstore.extensions.generateRandomCommentID
+import com.example.bookstore.models.Address
 import com.example.bookstore.models.Book
 import com.example.bookstore.models.BookGenres
 import com.example.bookstore.models.Cart
@@ -10,14 +11,15 @@ import com.example.bookstore.models.Comment
 import com.example.bookstore.models.CommentDetail
 import com.example.bookstore.models.FriendEvaluation
 import com.example.bookstore.models.Friends
+import com.example.bookstore.models.Notify
 import com.example.bookstore.models.Order
 import com.example.bookstore.models.Rating
 import com.example.bookstore.models.RatingDetail
 import com.example.bookstore.models.TotalRateBook
 import com.example.bookstore.models.User
 import com.example.bookstore.models.Voucher
+import com.example.bookstore.util.Utils
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.ktx.Firebase
@@ -34,12 +36,6 @@ class CloudStoreSource: IFirebaseSource.CloudStore {
         for (bookDocs in result) {
             val book = bookDocs.toObject<Book>()
             listTypeBook.add(book)
-
-            for (genre in book.genres) {
-                val book1 = listTypeBook.find { it.title == genre }
-                    ?: Book().also { listTypeBook.add(it) }
-                listTypeBook.add(book1)
-            }
         }
         return listTypeBook
     }
@@ -353,6 +349,14 @@ class CloudStoreSource: IFirebaseSource.CloudStore {
         return documentRef.toObject<User>()!!
     }
 
+    override suspend fun getUserByCusID(customerID: String): User {
+        val documentUserRef = Firebase.firestore.collection("user").document("information")
+            .collection("byUserID").whereEqualTo("customerCode", customerID).get().await()
+        Log.e("TAG", "getUserByCusID: $documentUserRef và ${documentUserRef.first().toObject<User>()}", )
+        return documentUserRef.first().toObject<User>()
+    }
+
+
     override suspend fun getListFriend(userID: String): MutableList<User> {
         var listComment: MutableList<User> = mutableListOf()
         val docFriendRef = db.collection("user").document("friends")
@@ -368,12 +372,38 @@ class CloudStoreSource: IFirebaseSource.CloudStore {
 
     override suspend fun updateUser(user: User): Int {
         var result = 0
-        db.collection("user").document("information")
-            .collection("byUserID").document(user.userID).update("imageUser", user.imageUser)
-            .addOnSuccessListener {
-                result = 1
-            }.addOnFailureListener {
-                result=0
+        val userDocRef = db.collection("user").document("information")
+            .collection("byUserID").document(user.userID)
+        userDocRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    userDocRef.update("imageUser", user.imageUser)
+                        .addOnSuccessListener {
+                            result = 1
+                        }
+                        .addOnFailureListener {
+                            result = 0
+                        }
+                    userDocRef.update(
+                        mapOf(
+                        "userID" to user.userID,
+                        "customerCode" to user.customerCode,
+                        "userName" to user.userName,
+                        "gender" to user.gender,
+                        "dateOfBirth" to user.dateOfBirth,
+                        "email" to user.email,
+                        "phoneNumber" to user.phoneNumber,
+                        "imageUser" to user.imageUser,
+                    ))
+                        .addOnSuccessListener {
+                            result = 1
+                        }.addOnFailureListener {
+                            result=0
+                        }
+                }
+            }
+            .addOnFailureListener {
+                result = 0
             }
         return result
     }
@@ -569,4 +599,101 @@ class CloudStoreSource: IFirebaseSource.CloudStore {
             0
         }
     }
+
+    override suspend fun addMessage(sender: String, receiver: String, message: String,
+                                    friendImage: String, friendName: String,userName: String): Int {
+        return try {
+            val hashMap = hashMapOf<String, Any>(
+                "sender" to sender,
+                "receiver" to receiver,
+                "message" to message,
+                "time" to Utils.getTime(),
+                "date" to Utils.getDate()
+            )
+            val uniqueID = listOf(sender, receiver).sorted()
+            uniqueID.joinToString(separator = "")
+            db.collection("Messages").document(uniqueID.toString()).collection("chats")
+                .document(Utils.getDate()+Utils.getTime()).set(hashMap).await()
+            val hashMapSender = hashMapOf<String, Any>(
+                "friendID" to receiver,
+                "time" to Utils.getTime(),
+                "date" to Utils.getDate(),
+                "sender" to sender,
+                "message" to message,
+                "friendsImage" to friendImage,
+                "name" to friendName,
+                "person" to "you"
+            )
+            val hashMapReceiver = hashMapOf<String, Any>(
+                "friendID" to sender,
+                "time" to Utils.getTime(),
+                "date" to Utils.getDate(),
+                "sender" to receiver,
+                "message" to message,
+                "friendsImage" to friendImage,
+                "name" to friendName,
+                "person" to ""
+            )
+            db.collection("MessagesForRecent").document("ByUserID")
+                .collection(sender).document(receiver).set(hashMapSender)
+            db.collection("MessagesForRecent").document("ByUserID")
+                .collection(receiver).document(sender).set(hashMapReceiver)
+            1
+        }catch (e: Exception){
+            0
+        }
+    }
+    override suspend fun addNewAddress(userID: String, address: Address): Int {
+        return try {
+            val hashMapAddress = hashMapOf<String, Any>(
+                "id" to address.id,
+                "name" to address.name,
+                "phoneNumber" to address.phoneNumber,
+                "province" to address.province,
+                "district" to address.district,
+                "communeOrAward" to address.communeOrAward,
+                "detailDescription" to address.detailDescription,
+                "coordinates" to address.coordinates,
+                "isDefault" to address.isDefault,
+            )
+            val addressRef = db.collection("user").document("orderAddress")
+                .collection(userID).document(address.id)
+            val documentSnapshot = addressRef.get().await()
+            if (documentSnapshot.exists()) {
+                addressRef.update(hashMapAddress).await()
+            } else {
+                addressRef.set(hashMapAddress).await()
+            }
+            1
+        } catch (e: Exception) {
+            0
+        }
+    }
+
+    override suspend fun deleteAddress(userID: String, address: Address): Int {
+        db.collection("user").document("orderAddress")
+            .collection(userID).document(address.id).delete().await()
+        return 0
+    }
+
+    override suspend fun getAddresses(userID: String): List<Address> {
+        val addresses = mutableListOf<Address>()
+        val docRef = db.collection("user").document("orderAddress")
+            .collection(userID).get().await()
+        for(doc in docRef){
+            addresses.add(doc.toObject<Address>())
+        }
+        return addresses
+    }
+
+    override suspend fun getNotifications(userID: String): List<Notify> {
+        val notifications = mutableListOf<Notify>()
+        val docRef = db.collection("user").document("notifications")
+            .collection(userID).get().await()
+        for(doc in docRef){
+            notifications.add(doc.toObject<Notify>())
+        }
+        return notifications
+    }
 }
+

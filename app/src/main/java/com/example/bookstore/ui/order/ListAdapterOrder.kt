@@ -33,7 +33,7 @@ class ListAdapterOrder(private val onClickItemOrder: (Order) -> Unit,
                 }
                 txtvStatusOrderDetail.text = item.orderStatus
                 txtvTotalQuantity.text = "${item.listCart.size} sản phẩm"
-                txtvTotalAmountOrder.text = item.totalPayment.toString()
+                txtvTotalAmountOrder.text = decimalFormat.format(item.totalPayment).toString() +"đ"
             }
             binding.btnCancelOrder.setOnClickListener {
                 onClickCancelOrder(item)

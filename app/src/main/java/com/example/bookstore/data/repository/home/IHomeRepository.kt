@@ -10,4 +10,6 @@ interface IHomeRepository {
     suspend fun pushGenreBook(): DataResult<Int>
     suspend fun getBookByGenre(): DataResult<List<BookGenres>>
     suspend fun addUser(user: User): DataResult<Int>
+   suspend fun getUserByCusID(customerID: String): DataResult<User>
+    suspend fun addFriends(userID: String, friendID: String): DataResult<Int>
 }

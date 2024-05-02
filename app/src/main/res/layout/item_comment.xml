@@ -20,8 +20,7 @@
         <ImageView
             android:id="@+id/img_user"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/dac_nhan_tam_book" />
+            android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -29,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Tấn Đặng"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_dots"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
@@ -47,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtv_name_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txtv_name_user"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtv_name_user" />
 
 
@@ -69,7 +68,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="16/3/2024"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -81,9 +79,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
         android:layout_marginEnd="8dp"
-        android:text="Sách hay quá trời hay, hay ơi là hay, hay lắm luôn, không chê gì được luôn, quá hay, tuyệt cú mèo!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView17"
@@ -110,7 +106,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="100"
         app:layout_constraintBottom_toBottomOf="@+id/img_like"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

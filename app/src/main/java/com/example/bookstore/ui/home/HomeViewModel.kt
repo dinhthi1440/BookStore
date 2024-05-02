@@ -16,8 +16,11 @@ class HomeViewModel(private val homeRepository: IHomeRepository):BaseViewModel()
     private val _getBookByGenre = MutableLiveData<List<BookGenres>>()
     val getBookByGenre: LiveData<List<BookGenres>> get() = _getBookByGenre
 
-    private val _getAddUserResult = MutableLiveData<Int>()
-    val getAddUserResult: LiveData<Int> get() = _getAddUserResult
+    private val _addFollowResult = MutableLiveData<Int>()
+    val addFollowResult: LiveData<Int> get() = _addFollowResult
+
+    private val _getUserResult = MutableLiveData<User>()
+    val getUserResult: LiveData<User> get() = _getUserResult
 
     fun getAllBook(){
         executeTask(
@@ -25,6 +28,13 @@ class HomeViewModel(private val homeRepository: IHomeRepository):BaseViewModel()
             onSuccess = {
                 _getResults.value = it
             },
+            onError = {}
+        )
+    }
+    fun getUserByCusID(customerID: String){
+        executeTask(
+            request = {homeRepository.getUserByCusID(customerID)},
+            onSuccess = {_getUserResult.value = it},
             onError = {}
         )
     }
@@ -46,11 +56,10 @@ class HomeViewModel(private val homeRepository: IHomeRepository):BaseViewModel()
             onError = {}
         )
     }
-
-    fun addUser(user: User){
+    fun addFriends(userID: String, friendID: String){
         executeTask(
-            request = { homeRepository.addUser(user) },
-            onSuccess = {_getAddUserResult.value = it},
+            request = {homeRepository.addFriends(userID, friendID)},
+            onSuccess = {_addFollowResult.value = it},
             onError = {}
         )
     }

@@ -14,8 +14,13 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loginFragment"
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -45,6 +50,12 @@
         <action
             android:id="@+id/action_homeFragment_to_voucherFragment"
             app:destination="@id/voucherFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chattingFragment"
+            app:destination="@id/chattingFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifyFragment"
@@ -62,6 +73,10 @@
         <action
             android:id="@+id/action_settingFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            app:popUpToInclusive="true"
+            android:id="@+id/action_settingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendsFragment"
@@ -98,6 +113,9 @@
         <action
             android:id="@+id/action_bookDetailFragment_to_replyRatingFragment"
             app:destination="@id/replyRatingFragment" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_payFragment"
+            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -147,11 +165,11 @@
         android:label="fragment_pay"
         tools:layout="@layout/fragment_pay" >
         <action
-            android:id="@+id/action_payFragment_to_selectAddressFragment"
-            app:destination="@id/selectAddressFragment" />
-        <action
             android:id="@+id/action_payFragment_to_voucherFragment"
             app:destination="@id/voucherFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_selectAddressFragment"
+            app:destination="@id/selectAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/voucherFragment"
@@ -206,5 +224,25 @@
         android:name="com.example.bookstore.ui.chatting.ChattingFragment"
         android:label="fragment_chatting"
         tools:layout="@layout/fragment_chatting" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.bookstore.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.example.bookstore.ui.on_boarding.OnBoardingFragment"
+        android:label="fragment_on_boarding"
+        tools:layout="@layout/fragment_on_boarding" >
+        <action
+            android:id="@+id/action_onBoardingFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/onBoardingFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

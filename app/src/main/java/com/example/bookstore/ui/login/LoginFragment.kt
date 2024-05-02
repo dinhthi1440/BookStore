@@ -9,8 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookstore.R
 import com.example.bookstore.base.BaseFragment
 import com.example.bookstore.databinding.FragmentLoginBinding
+import com.example.bookstore.extensions.getFirstLogIn
 import com.example.bookstore.extensions.getUserID
 import com.example.bookstore.extensions.openDlSuccess
+import com.example.bookstore.extensions.saveFirstLogIn
 import com.example.bookstore.extensions.saveUserID
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -24,8 +26,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private val auth: FirebaseAuth by lazy { Firebase.auth }
     override fun initData() {
-        if(sharedPreferences.getUserID()!=null && sharedPreferences.getUserID()!="" ){
+        if(sharedPreferences.getUserID()!="" && sharedPreferences.getFirstLogIn()=="NoFirstTime"){
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }else if(sharedPreferences.getUserID()!="" &&  sharedPreferences.getFirstLogIn()=="FirstTime"){
+            val bundle = bundleOf("userID" to sharedPreferences.getUserID())
+            findNavController().navigate(R.id.action_loginFragment_to_onBoardingFragment, bundle)
         }
     }
 
@@ -33,7 +38,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.textvSignup.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-
         binding.btnLogin.setOnClickListener {
             val email = binding.textipEmail.text.toString()
             val password = binding.textipPassword.text.toString()
@@ -42,12 +46,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     .addOnSuccessListener { authResult ->
                         val userID = authResult.user?.uid ?: ""
                         val emailResult = authResult.user?.email ?: ""
+                        viewModel.getUser(userID)
                         sharedPreferences.saveUserID(userID)
-                        val bundle = bundleOf("email" to emailResult)
-                        context?.let { it1 -> dialog(it1).openDlSuccess() }
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment, bundle)
-                        },2000)
+                        viewModel.getUserResult.observe(viewLifecycleOwner){
+                            if(it!=null){
+                                if(it.userName==""){
+                                    val bundle = bundleOf("userID" to userID)
+                                    sharedPreferences.saveFirstLogIn("FirstTime")
+                                    findNavController().navigate(R.id.action_loginFragment_to_onBoardingFragment, bundle)
+                                }else{
+                                    sharedPreferences.saveFirstLogIn("NoFirstTime")
+                                    val bundle = bundleOf("email" to emailResult)
+                                    context?.let { it1 -> dialog(it1).openDlSuccess() }
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment, bundle)
+                                    },2000)
+                                }
+                            }
+                        }
+
+
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, "Đăng nhập thất bại, hãy thử lại",

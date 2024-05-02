@@ -1,12 +1,16 @@
 package com.example.bookstore.data.service
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import com.example.bookstore.models.Address
 import com.example.bookstore.models.Book
 import com.example.bookstore.models.BookGenres
 import com.example.bookstore.models.Cart
 import com.example.bookstore.models.Comment
 import com.example.bookstore.models.CommentDetail
 import com.example.bookstore.models.FriendEvaluation
+import com.example.bookstore.models.Messages
+import com.example.bookstore.models.Notify
 import com.example.bookstore.models.Order
 import com.example.bookstore.models.Rating
 import com.example.bookstore.models.RatingDetail
@@ -41,6 +45,7 @@ interface IFirebaseSource {
 
         suspend fun addUser(user: User): Int
         suspend fun getUser(userID: String): User
+        suspend fun getUserByCusID(customerID: String): User
         suspend fun getListFriend(userID: String): MutableList<User>
 
         suspend fun updateUser(user: User): Int
@@ -57,6 +62,14 @@ interface IFirebaseSource {
 
         suspend fun addFriends(userID: String, friendID: String): Int
         suspend fun deleteFriends(userID: String, friendID: String): Int
+
+        suspend fun addMessage(sender: String, receiver: String, message: String,
+                               friendImage: String, friendName: String,userName: String): Int
+
+        suspend fun addNewAddress(userID: String, address: Address): Int
+        suspend fun deleteAddress(userID: String, address: Address): Int
+        suspend fun getAddresses(userID: String): List<Address>
+        suspend fun getNotifications(userID: String): List<Notify>
 
     }
 

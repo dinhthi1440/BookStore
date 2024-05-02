@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.bookstore.extensions.openDlLoading
 import org.koin.android.ext.android.get
+import java.text.DecimalFormat
 
 abstract class BaseFragment<VB: ViewBinding>(
     private val bindingInflater: (LayoutInflater) -> VB
@@ -21,6 +22,7 @@ abstract class BaseFragment<VB: ViewBinding>(
     protected abstract val viewModel: BaseViewModel
     protected val sharedPreferences by lazy { get<SharedPreferences>() }
     private val dialog by lazy{context?.let { Dialog(it) }}
+    protected val decimalFormat = DecimalFormat("#,###.###")
     protected fun dialog(context1: Context): Dialog {
         return Dialog(context1)
     }

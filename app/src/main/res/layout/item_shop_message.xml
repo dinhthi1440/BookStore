@@ -39,18 +39,19 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/cardView3"
-        app:layout_constraintEnd_toStartOf="@+id/textView14"
+        app:layout_constraintEnd_toStartOf="@+id/txtv_time"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="@+id/cardView3"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/txtv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="6 phút"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtv_name_shop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -58,6 +59,7 @@
         app:layout_constraintTop_toTopOf="@+id/txtv_name_shop" />
 
     <TextView
+        android:id="@+id/txtv_recent_chat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

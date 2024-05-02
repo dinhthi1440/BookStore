@@ -74,8 +74,14 @@ class BookDetailFragment:BaseFragment<FragmentBookDetailBinding>(FragmentBookDet
                 }
             }
             purchase.setOnClickListener {
-
-                findNavController().navigate(R.id.action_bookDetailFragment_to_cartFragment)
+                val listProduct = mutableListOf<Cart>()
+                listProduct.add(
+                    Cart(
+                        Random.generateRandomCartID(), sharedPreferences.getUserID()!!, book, 1
+                    )
+                )
+                val bundle = bundleOf("listProduct" to listProduct)
+                findNavController().navigate(R.id.action_bookDetailFragment_to_payFragment, bundle)
             }
             txtvRating.setOnClickListener {
                 val bundle = bundleOf("book" to book)
@@ -114,13 +120,13 @@ class BookDetailFragment:BaseFragment<FragmentBookDetailBinding>(FragmentBookDet
                 txtvGenre.text = book.genres.joinToString(" | ")
                 if(book.rating != 0.0){
                     txtvPromotionPercent.text = "-" + book.rating.toString() + "%"
-                    txtvPrice.text = book.price.toString() +"đ"
+                    txtvPrice.text = decimalFormat.format(book.price).toString() +"đ"
                     txtvPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
-                    txtvSellingPrice.text = (book.price * (100.0-book.rating) /100.0).toInt().toString() +"đ"
+                    txtvSellingPrice.text = decimalFormat.format((book.price * (100.0-book.rating) /100.0).toInt()).toString() +"đ"
                 }else{
                     txtvPromotionPercent.visibility = View.GONE
                     txtvPrice.visibility = View.GONE
-                    txtvSellingPrice.text = book.price.toString() +"đ"
+                    txtvSellingPrice.text = decimalFormat.format(book.price).toString() +"đ"
                 }
                 val images = ArrayList<SlideModel>()
                 for (img in book.images){

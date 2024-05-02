@@ -11,7 +11,9 @@ import com.example.bookstore.R
 import com.example.bookstore.base.BaseFragment
 import com.example.bookstore.databinding.FragmentPayBinding
 import com.example.bookstore.extensions.generateIDPayment
+import com.example.bookstore.extensions.getAddressID
 import com.example.bookstore.extensions.getCurrentDateTime
+import com.example.bookstore.extensions.getUserID
 import com.example.bookstore.models.Cart
 import com.example.bookstore.models.Order
 import com.example.bookstore.models.Voucher
@@ -22,12 +24,11 @@ import kotlin.random.Random
 class PayFragment:BaseFragment<FragmentPayBinding>(FragmentPayBinding::inflate) {
     override val viewModel by viewModel<PayViewModel>()
 
-    private val listAdapterBookPay by lazy { ListAdapterBookPay(::listCart) }
+    private val listAdapterBookPay by lazy { ListAdapterBookPay(::onUpdatePayment) }
     private var totalPriceMain = 0.0
     private val listProduct: MutableList<Cart>? by lazy {
         arguments?.getSerializable("listProduct") as? MutableList<Cart>
     }
-    private var _listProduct = mutableListOf<Cart>()
     private var getVoucher = Voucher()
     private val transportFee= 40000.0
     private var totalPayment= 0.0
@@ -63,30 +64,32 @@ class PayFragment:BaseFragment<FragmentPayBinding>(FragmentPayBinding::inflate) 
                 }else{
                     payMethod = binding.txtvBtnCard.text.toString()
                 }
-                for (book in _listProduct){
-
-                }
-
-                binding.apply {
-                    if(txtvAddress.text != "" && txtvNumberPhone.text !=""){
-                        val order = Order(
-                            Random.generateIDPayment(), "123456",
-                            "Chờ xác nhận đơn hàng",_listProduct, totalPriceMain,
-                            transportFee, totalPayment, getVoucher, payMethod,
-                            Calendar.getInstance().getCurrentDateTime(), "Hà Nội",
-                            txtvAddress.text.toString(),
-                            txtvNumberPhone.text.toString(), txtvUsername.text.toString()
-                        )
-                        viewModel.addNewOrder(order)
-                        viewModel.getAddResult.observe(viewLifecycleOwner){
-                            viewModel.deleteCarts("123456", listCartID)
-                            viewModel.getDeleteCartResult.observe(viewLifecycleOwner){
-                                Toast.makeText(context, "Đã xoá thành công", Toast.LENGTH_SHORT).show()
-                                findNavController().popBackStack()
+                if(txtvAddress.text != ""){
+                    binding.apply {
+                        if(txtvAddress.text != "" && txtvNumberPhone.text !=""){
+                            val order = listProduct?.let { it1 ->
+                                Order(
+                                    Random.generateIDPayment(), sharedPreferences.getUserID()!!,
+                                    "Chờ xác nhận đơn hàng", it1.toList(), totalPriceMain,
+                                    transportFee, totalPayment, getVoucher, payMethod,
+                                    Calendar.getInstance().getCurrentDateTime(), "Hà Nội",
+                                    txtvAddress.text.toString(),
+                                    txtvNumberPhone.text.toString(), txtvUsername.text.toString()
+                                )
+                            }
+                            viewModel.addNewOrder(order!!)
+                            viewModel.getAddResult.observe(viewLifecycleOwner){
+                                viewModel.deleteCarts(sharedPreferences.getUserID()!!, listCartID)
+                                viewModel.getDeleteCartResult.observe(viewLifecycleOwner){
+                                    findNavController().popBackStack()
+                                }
                             }
                         }
                     }
+                }else{
+                    Toast.makeText(context, "Hãy chọn địa chỉ", Toast.LENGTH_SHORT).show()
                 }
+
             }
 
         }
@@ -94,52 +97,67 @@ class PayFragment:BaseFragment<FragmentPayBinding>(FragmentPayBinding::inflate) 
 
     @SuppressLint("SetTextI18n")
     override fun bindData() {
+        viewModel.getAddresses(sharedPreferences.getUserID()!!)
+        viewModel.getAddressesResult.observe(viewLifecycleOwner){
+            val address = it.find { itemAddress -> itemAddress.id == sharedPreferences.getAddressID() }
+            if(address!=null){
+                binding.apply {
+                    txtvUsername.text = address.name + " |"
+                    txtvNumberPhone.text = address.phoneNumber
+                    txtvAddress.text = "${address.detailDescription}, ${address.communeOrAward}, ${address.district}, ${address.province}"
+                }
+            }
+        }
+        voucherResult()
+        listCartID = mutableListOf()
+        for (cart in listProduct!!){
+            listCartID.add(cart.cardID)
+            onUpdatePayment(cart)
+        }
+
+        binding.txtvVoucher.text = "-${getVoucher.maxDiscount}đ"
+        val price = totalPriceMain + transportFee - getVoucher.maxDiscount
+        totalPayment = price
+
+        binding.apply {
+            txtvTotalTransportFee.text = decimalFormat.format(transportFee).toString() + "đ"
+            txtvTotalPay.text = decimalFormat.format(price).toString() +"đ"
+            txtvTotalPriceMain.text = decimalFormat.format(price).toString() +"đ"
+            checkboxBtnCash.isChecked=true
+            recyclerviewListProduct.layoutManager = LinearLayoutManager(root.context)
+            listAdapterBookPay.submitList(listProduct)
+            recyclerviewListProduct.adapter = listAdapterBookPay
+        }
+
+    }
+    @SuppressLint("SetTextI18n")
+    private fun onUpdatePayment(cart: Cart){
+        var totalPrice = 0.0
+        listProduct?.forEach {
+            if(it.cardID == cart.cardID){
+                it.quantity = cart.quantity
+            }
+            totalPrice +=it.quantity*it.book.price
+        }
+        binding.txtvTotalProduct.text = decimalFormat.format(totalPrice).toString() +"đ"
+        totalPriceMain = totalPrice
+        val price = (totalPriceMain + transportFee - getVoucher.maxDiscount)
+        totalPayment = price
+        binding.txtvTotalPriceMain.text = decimalFormat.format(price).toString() +"đ"
+        binding.txtvTotalPay.text = decimalFormat.format(price).toString() +"đ"
+    }
+
+    private fun voucherResult(){
         setFragmentResultListener("getVoucher") { requestKey, bundle ->
             val result = bundle.getSerializable("voucher") as? Voucher
             if(result!=null) {
                 getVoucher = result
                 binding.txtvVoucher.text = "-${getVoucher.maxDiscount}đ"
                 val price = totalPriceMain + transportFee - getVoucher.maxDiscount
-                binding.txtvTotalPay.text = price.toString() +"đ"
-                binding.txtvTotalPriceMain.text = price.toString() +"đ"
+                binding.txtvTotalPay.text = decimalFormat.format(price).toString() +"đ"
+                binding.txtvTotalPriceMain.text = decimalFormat.format(price).toString() +"đ"
             }
         }
-        listCartID = mutableListOf()
-        for (cart in listProduct!!){
-            listCartID.add(cart.cardID)
-        }
-        Log.e("TAG", "bindData: $listProduct", )
-        binding.txtvVoucher.text = "-${getVoucher.maxDiscount}đ"
-        val price = totalPriceMain + transportFee - getVoucher.maxDiscount
-        totalPayment = price
-        binding.txtvTotalTransportFee.text = transportFee.toString() + "đ"
-        binding.txtvTotalPay.text = price.toString() +"đ"
-        binding.txtvTotalPriceMain.text = price.toString() +"đ"
-        binding.checkboxBtnCash.isChecked=true
-        binding.apply {
-            recyclerviewListProduct.layoutManager = LinearLayoutManager(root.context)
-            if(_listProduct.isEmpty()){
-                Log.e("TAG", "bindData: 1", )
-                listAdapterBookPay.submitList(listProduct)
-            }else{
-                Log.e("TAG", "bindData: 2", )
-                listAdapterBookPay.submitList(_listProduct)
-
-            }
-            recyclerviewListProduct.adapter = listAdapterBookPay
-        }
-
-    }
-    @SuppressLint("SetTextI18n")
-    private fun listCart(listCart: List<Cart>, totalPrice: Double){
-        binding.txtvTotalProduct.text = totalPrice.toString() +"đ"
-        totalPriceMain = totalPrice
-        Log.e("TAG", "listCart: ${listCart.size}", )
-        val price = (totalPriceMain + transportFee - getVoucher.maxDiscount)
-        totalPayment = price
-        binding.txtvTotalPriceMain.text = price.toString() +"đ"
-        binding.txtvTotalPay.text = price.toString() +"đ"
-        _listProduct = listCart.toMutableList()
     }
 
     override fun destroy() {

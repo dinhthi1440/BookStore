@@ -1,20 +1,15 @@
 package com.example.bookstore.ui.order
 
-import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookstore.R
 import com.example.bookstore.base.BaseFragment
-import com.example.bookstore.base.BaseViewModel
 import com.example.bookstore.databinding.FragmentOrderBinding
 import com.example.bookstore.extensions.confirmCancelOrder
-import com.example.bookstore.models.Book
-import com.example.bookstore.models.Evaluate
+import com.example.bookstore.extensions.getUserID
 import com.example.bookstore.models.Order
-import com.example.bookstore.ui.order_detail.ListAdapterProductOrdered
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OrderFragment : BaseFragment<FragmentOrderBinding>(FragmentOrderBinding::inflate) {
@@ -36,7 +31,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>(FragmentOrderBinding::i
     }
 
     override fun bindData() {
-        viewModel.getOrder("123456")
+        viewModel.getOrder(sharedPreferences.getUserID()!!)
         viewModel.getOrderResult.observe(viewLifecycleOwner){
             listOrder = it.toMutableList()
             binding.apply {
@@ -52,12 +47,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>(FragmentOrderBinding::i
         findNavController().navigate(R.id.action_orderFragment_to_orderDetailFragment, bundle)
     }
     private fun onClickCancelOrder(order: Order){
-        dialog(requireContext()).confirmCancelOrder {
+        dialog(requireContext()).confirmCancelOrder("Bạn có chắc chắn muốn huỷ đơn hàng này không?"){
             if(it=="yes"){
-                viewModel.cancelOrder("123456", order)
+                viewModel.cancelOrder(sharedPreferences.getUserID()!!, order)
                 viewModel.getCancelOrderResult.observe(viewLifecycleOwner){
                     Toast.makeText(context, "Huỷ thành công", Toast.LENGTH_SHORT).show()
-                    viewModel.getOrder("123456")
+                    viewModel.getOrder(sharedPreferences.getUserID()!!)
                     viewModel.getOrderResult.observe(viewLifecycleOwner){
                         listOrder = it.toMutableList()
                         binding.apply {

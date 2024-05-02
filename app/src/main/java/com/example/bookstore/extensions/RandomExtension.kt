@@ -48,3 +48,18 @@ fun Random.generateRandomCommentID(): String {
         .joinToString("")
     return "comment$randomNumberPart"
 }
+
+fun Random.generateRandomNotifiID(): String {
+    val random = Random
+    val randomNumberPart = (1..20)
+        .map { random.nextInt(0, 20) }
+        .joinToString("")
+    return "notification$randomNumberPart"
+}
+fun Random.generateAddressID(): String {
+    val random = Random
+    val randomNumberPart = (1..15)
+        .map { random.nextInt(0, 20) }
+        .joinToString("")
+    return "address$randomNumberPart"
+}

@@ -4,4 +4,6 @@
     android:text="Giới tính"
     android:padding="16dp"
     android:textSize="14sp"
+    android:maxLines="1"
+    android:ellipsize="end"
     xmlns:android="http://schemas.android.com/apk/res/android" />

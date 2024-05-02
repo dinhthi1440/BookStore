@@ -66,9 +66,10 @@
                 android:textColor="@color/cus_green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_login"
                 android:text="@string/login"
+                android:textColor="@color/white"
                 android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

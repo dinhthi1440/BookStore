@@ -34,6 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 }
             }
         }
+
     }
     private fun setNavigationVisible(isVisible: Boolean = false) {
         binding.navView.isVisible = isVisible

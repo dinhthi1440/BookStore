@@ -18,7 +18,9 @@ import com.example.bookstore.databinding.DlAnimationSuccessBinding
 import com.example.bookstore.databinding.DlConfirmCancelOrderBinding
 import com.example.bookstore.databinding.DlConfirmPasswordBinding
 import com.example.bookstore.databinding.DlConfirmingPurchaseQuaniyBinding
+import com.example.bookstore.databinding.DlScannedQrBinding
 import com.example.bookstore.models.Book
+import com.example.bookstore.models.User
 
 fun Dialog.openDlSuccess(stopFlag: Boolean = false) {
     val binding = DlAnimationSuccessBinding.inflate(layoutInflater)
@@ -130,7 +132,7 @@ fun Dialog.confirmPassword(pressButton: (String) -> Unit) {
     show()
 }
 
-fun Dialog.confirmCancelOrder(pressButton: (String) -> Unit) {
+fun Dialog.confirmCancelOrder(title: String , pressButton: (String) -> Unit) {
     val binding = DlConfirmCancelOrderBinding.inflate(layoutInflater)
     setContentView(binding.root)
     window?.apply {
@@ -144,11 +146,43 @@ fun Dialog.confirmCancelOrder(pressButton: (String) -> Unit) {
         }
     }
 
+    binding.txtvWarning.text = title
     binding.layoutBtnYes.setOnClickListener {
         pressButton("yes")
         this.dismiss()
     }
     binding.layoutBtnNo.setOnClickListener {
+        this.dismiss()
+    }
+    show()
+}
+
+fun Dialog.scanQRResult(user: User, pressButton: (User, String) -> Unit) {
+    val binding = DlScannedQrBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    window?.apply {
+        setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+        attributes.apply {
+            gravity = Gravity.CENTER
+        }
+    }
+    binding.apply {
+        Glide.with(context).load(user.imageUser).into(imgAvtUser)
+        txtvDateBirth.text = user.dateOfBirth
+        txtvGender.text = user.gender
+        txtvUsername.text = user.userName
+    }
+    binding.imgCancel.setOnClickListener { this.dismiss() }
+    binding.btnChatting.setOnClickListener {
+        pressButton(user, "chatting")
+        this.dismiss()
+    }
+    binding.btnFollow.setOnClickListener {
+        pressButton(user, "follow")
         this.dismiss()
     }
     show()

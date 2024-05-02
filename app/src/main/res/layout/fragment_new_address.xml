@@ -166,50 +166,81 @@
             app:layout_constraintTop_toBottomOf="@+id/textView37"
             app:layout_constraintVertical_bias="0.0">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edittext_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="4dp"
-                android:drawableEnd="@drawable/down_icon_16"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:editable="false"
                 android:textSize="14sp"
-                android:hint="Tỉnh/Thành phố"
-                tools:ignore="Deprecated" />
+                app:hintEnabled="false"
+                tools:ignore="Deprecated">
+                <AutoCompleteTextView
+                    android:id="@+id/actv_province"
+                    android:hint="Tỉnh thành"
+                    android:textSize="14sp"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edittext_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="4dp"
                 android:drawableEnd="@drawable/down_icon_16"
-                android:editable="false"
-                android:textSize="14sp"
-                android:hint="Quận/Huyện"
-                tools:ignore="Deprecated" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                app:hintEnabled="false"
+                tools:ignore="Deprecated" >
+                <AutoCompleteTextView
+                    android:id="@+id/actv_district"
+                    android:textSize="14sp"
+                    android:hint="Quận/Huyện"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edittext_commune"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/down_icon_16"
-                android:editable="false"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="4dp"
-                android:hint="Xã/Phường"
-                android:textSize="14sp"
-                tools:ignore="Deprecated" />
+                app:hintEnabled="false"
+                android:editable="false"
+                tools:ignore="Deprecated">
+                <AutoCompleteTextView
+                    android:id="@+id/actv_communeOrAward"
+                    android:hint="Xã/Phường"
+                    android:textSize="14sp"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edittext_detail_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:textSize="14sp"
-                android:layout_marginVertical="4dp"
-                android:hint="Nhập thông tin địa chỉ cụ thể" />
+                app:hintEnabled="false"
+                android:layout_marginVertical="4dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtip_address_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Nhập thông tin địa chỉ cụ thể"
+                    android:textSize="14sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -271,7 +302,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -280,6 +311,7 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/custom_bg_button"
             android:text="Hoàn thành"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

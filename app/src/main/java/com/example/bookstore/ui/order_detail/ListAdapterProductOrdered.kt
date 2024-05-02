@@ -33,14 +33,14 @@ class ListAdapterProductOrdered : BaseAdapter<Cart, BaseViewHolder<Cart>>(Cart.d
                     .load(item.book.images[0])
                     .into(imgBook)
                 if(item.book.rating != 0.0){
-                    txtvPrice.text = item.book.price.toString() +"đ"
+                    txtvPrice.text = decimalFormat.format(item.book.price).toString() +"đ"
                     txtvPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
                     sellingPrice = (item.book.price * (100.0-item.book.rating) /100.0)
                 }else{
                     txtvPrice.visibility = View.GONE
                     sellingPrice = item.book.price
                 }
-                txtvPromotionalPrice.text = sellingPrice.toString() + "đ"
+                txtvPromotionalPrice.text = decimalFormat.format(sellingPrice).toString() + "đ"
             }
 
         }

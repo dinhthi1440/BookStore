@@ -82,7 +82,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_pay" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +92,9 @@
             android:background="@drawable/custom_bg_button"
             android:text="Thanh toán (0)"
             android:textSize="12sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="4dp"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
