@@ -10,6 +10,7 @@ The application allows users to buy, view, review books and exchange information
 • Input & Validate : RxBinding. <br>
 • Local storage : Room Database. <br>
 • Asynchronous programming: RxKotlin, RxAndroid. 
+• Firebase: Authetication, Firestore to store data, Firebase Messaging to to push Notification 
 
 ## Authentication
 ![image](https://github.com/dinhthi1440/Club-management-program/assets/108991843/7a70053e-ffc3-417a-acf5-984dabfa5a74)
