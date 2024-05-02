@@ -9,8 +9,8 @@ The application allows users to buy, view, review books and exchange information
 • Navigation: Navigation Component <br>
 • Input & Validate : RxBinding. <br>
 • Local storage : Room Database. <br>
-• Asynchronous programming: RxKotlin, RxAndroid. 
-• Firebase: Authetication, Firestore to store data, Firebase Messaging to to push Notification 
+• Asynchronous programming: RxKotlin, RxAndroid. <br>
+• Firebase: Authetication, Firestore to store data, Firebase Messaging to to push Notification <br>
 • Zxing core to generate QR code image
 
 ## Authentication
